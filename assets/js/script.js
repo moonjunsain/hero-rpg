@@ -4,7 +4,7 @@ var monsters = [
         attackDmg: 12,
         hp: 30,
         maxHp: 30,
-        def: 5, 
+        def: 2, 
         img: $("#goblin-image"),
         attackMsg: "Goblin swings its sword",
         dropExpMax: 20,
@@ -21,10 +21,10 @@ var monsters = [
     },
     {
         monName: "Orc",
-        attackDmg: 20,
-        hp: 55,
-        maxHp: 55,
-        def: 12,
+        attackDmg: 25,
+        hp: 70,
+        maxHp: 70,
+        def: 6,
         img: $("#orc-image"),
         attackMsg: "Orc swings its club",
         dropExpMax: 30,
@@ -42,13 +42,13 @@ var monsters = [
     {
         monName: "Wyvern",
         attackDmg: 40,
-        hp: 70,
-        maxHp: 70,
-        def: 15,
+        hp: 200,
+        maxHp: 200,
+        def: 20,
         img: $("#wyvern-image"),
         attackMsg: "Wyvern decends from the above",
-        dropExpMax: 60,
-        dropExpMin: 25,
+        dropExpMax: 90,
+        dropExpMin: 35,
         calDmg: function(){
             var dmg = this.attackDmg + Math.floor(Math.random() * 15) + calCrit(this.attackDmg);
             console.log("damage from mon: " + dmg);
@@ -61,10 +61,10 @@ var monsters = [
     },
     {
         monName: "Dragon",
-        attackDmg: 55,
-        hp: 100,
-        maxHp: 100,
-        def: 100,
+        attackDmg: 65,
+        hp: 500,
+        maxHp: 500,
+        def: 40,
         img: $("#dragon-image"),
         attackMsg: "Dragon attacks with its claw",
         dropExpMax: 100,
@@ -91,7 +91,7 @@ var player = {
     },
     weapon: {
         weapName: ["Sword", "Wood Stick", "Axe", "Fist"],
-        weapDmg: [45, 12, 30, 5],
+        weapDmg: [30, 12, 25, 8],
         numUpgrades: 0,
         weapAcquired: ["You obtained a Sword!! A weapon for a man", "You obtained a Wood Stick... you can be creative i guess..", 
         "You obtained an Axe! Watch out for its sharp side!", "You obtained a Fist! Did you just learn how to make fist?"],
@@ -412,7 +412,12 @@ function levelUp(){
 
     player.maxHp += player.lv.current * 10;
     // increases exp needed by *= 1.5
-    player.lv.expNeeded += player.lv.expNeeded * 1.5;
+    if(player.lv.current < 3){
+        player.lv.expNeeded += 10;
+    } else {
+        player.lv.expNeeded += player.lv.expNeeded * 1.5;
+
+    }
 
     console.log("Plyaer current exp : " + player.lv.currentExp)
     console.log("Player current needed exp: " + player.lv.expNeeded)
@@ -432,24 +437,24 @@ function levelUp(){
 function upgradeWeapon(){
     var upgradesNum = player.weapon.numUpgrades;
     var extraDmg;
-    if(player.attackDmg >= 22){
+    if(player.attackDmg >= 60){
         extraDmg = Math.floor(Math.random() * ((player.attackDmg/2) - 10 + 1)) + 10  
     } else {
-        extraDmg = Math.floor(Math.random() * (20 - 10 + 1)) + 10
+        extraDmg = Math.floor(Math.random() * 20) + 1;
     }
     var chanceUpg = Math.floor(Math.random() * 100);
 
-    if(upgradesNum < 2 || chanceUpg > (20 + upgradesNum)){
+    if(upgradesNum < 2 || chanceUpg > (30 + (upgradesNum * 2))){
         player.attackDmg += extraDmg;
         eventStatus.text(player.weapon.weapName[playerCurrentWeapon] + " has been upgraded!");
         attackStatus.text(extraDmg + " damage increase!");
         player.weapon.numUpgrades++;
     }
-    else if(chanceUpg <= (10 + upgradesNum)){
+    else if(chanceUpg <= (15 + (upgradesNum * 2))){
         player.attackDmg -= Math.floor(player.attackDmg/2);
         eventStatus.text("You burned your weapon!!");
         attackStatus.text("You lost half of your damage!")
-    } else if (chanceUpg <= (20 + upgradesNum)){
+    } else if (chanceUpg <= (30 + (upgradesNum * 2))){
         player.attackDmg -= 10;
         eventStatus.text("Upgrade failed...");
         attackStatus.text("You lost 10 damage!");
@@ -462,7 +467,7 @@ function upgradeWeapon(){
 function nextStageHeal(){
     healNext.css("display", "none");
     var maxHeal = Math.floor(player.maxHp / 2)
-    var healAmnt = Math.floor(Math.random() * (maxHeal + 20 + 1)) + 20;
+    var healAmnt = Math.floor(Math.random() * (maxHeal - 20 + 1)) + 20;
     player.hp += healAmnt;
     if(player.hp >= player.maxHp){
         player.hp = player.maxHp;
