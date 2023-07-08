@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/style/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+
+    <title>Hero Rpg</title>
+</head>
+<body>
+    <section class="background">
+        <img src="./assets/image/background/fantasy-forest.jpg" alt="background">
+    </section>
+
+    <section id="player-image">
+        <img src="./assets/image/characters/warrior.png" alt="warrior">
+    </section>
+
+    <section id="starting-point">
+        <h1>You embark on a journey as you woke up from a sleep... <br> Click the chest to begin...</h1>
+        <img id="chest" src="./assets/image/object/chest-closed.png" alt="closed-chest">
+        <img id="chest-opened" src="./assets/image/object/chest-opened.png" alt="opened-chest">
+        <button id="go">Go</button>
+    </section>
+
+    <section id="monster-container">
+        <img id="goblin-image" src="./assets/image/characters/goblin.png" data-monster="goblin" alt="monster">
+        <img id="orc-image" src="./assets/image/characters/orc.png" data-monster="orc" alt="orc">
+        <img id="dragon-image" src="./assets/image/characters/dragon.png" data-monster="dragon" alt="dragon">
+        <img id="wyvern-image" src="./assets/image/characters/wyvern.png" data-monster="wyvern" alt="wyvern">
+    </section>
+
+    <section id="textBox-container">
+        <article id="textBox">
+            <P id="player-status">HP: 100 <br>Lv: 1</P>
+            <p id="event-status"></p>
+            <p id="critical" style="color: red; display: none;">CRITICAL HIT</p>
+            <p id="attack-status"></p>
+            
+        </article>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>

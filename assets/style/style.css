@@ -1,0 +1,209 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    overflow: hidden;
+
+}
+
+.background img{
+    position: absolute;
+    z-index: -1;
+    width: 100vw;
+    height: 101vh;
+    filter: brightness(0.57);
+    
+}
+
+#starting-point {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#starting-point h1{
+    position: relative;
+    text-align: center;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    top: 10vh;
+    text-shadow: 0px 0px 20px green;
+    animation-name: glow;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes glow {
+    0% {text-shadow: 0px 0px 20px green;}
+    25% {text-shadow: 0px 0px 10px green;}
+    50% {text-shadow: 0px 0px 0px green;}
+    75% {text-shadow: 0px 0px 10px green;}
+    100% {text-shadow: 0px 0px 20px green;}
+    
+}
+#chest {
+    cursor: pointer;
+    position: relative;
+    top: 25vh;
+    width: 15vw;
+    transition: all 0.5s;
+    filter: grayscale(1);
+}
+
+#chest:hover {
+    filter: none;
+}
+
+#chest-opened {
+    display: none;
+    position: relative;
+    width: 17vw;
+    top: 25vh;
+
+}
+
+
+#textBox {
+    display: none;
+    background-color: #707252;
+    border: 2px black solid;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    width: 60vw;
+    height: 24vh;
+}
+
+#textBox-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 75vh;
+}
+
+#player-status{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    text-align: end;
+    margin: 1%;
+}
+
+#player-status, 
+#attack-status {
+    font-size: 125%;
+}
+
+#critical,
+#event-status {
+    font-size: 145%;
+}
+#event-status{
+    font-style: italic;
+
+}
+#textBox button {
+    cursor: pointer;
+    margin: 1%;
+    padding: 0.5% 1% 0.5% 1%;
+    background-color: snow;
+    font-size: medium;
+    border-radius: 0.5rem;
+    border: 0.1rem red solid;
+    animation-name: glowRed;
+    text-shadow: 0px 0px 15px rgb(250, 60, 60);
+    animation-name: glowRed;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    
+}
+
+
+@keyframes glowRed {
+    0% {text-shadow: 0px 0px 15px rgb(250, 60, 60);}
+    25% {text-shadow: 0px 0px 8px rgb(250, 60, 60);}
+    50% {text-shadow: 0px 0px 0px rgb(250, 60, 60);}
+    75% {text-shadow: 0px 0px 8px rgb(250, 60, 60);}
+    100% {text-shadow: 0px 0px 15px rgb(250, 60, 60);}
+    
+}
+
+
+#player-image {
+    display: none;
+    position: absolute;
+    top: 46vh;
+    left: -2vw;
+    animation-name: none;
+    animation-duration: 0.4s;
+    animation-iteration-count: 1;
+}
+
+@keyframes player-attack {
+    0% {left: -2vw;}
+    50% {left: 3vw; top: 44vh;}
+    100% {left: 5vw; top: 42vh;}
+}
+
+#player-image img {
+    width: 26vw;
+}
+
+#monster-container {
+    position: absolute;
+    left: 60vw;
+    filter: drop-shadow(2px 4px 6px black);
+    animation-name: none;
+    animation-duration: 0.4s;
+    animation-iteration-count: 1;
+}
+
+@keyframes monster-attack {
+    0% {left: 60vw;}
+    50% {left: 59vw; top: 1.5vh;}
+    100% {left: 58vw; top: 3vh;}
+}
+
+#dragon-image {
+    display: none;
+    width: 46vw;
+    position: relative;
+    left: -6vw;
+    top: 0vh;
+}
+
+#orc-image {
+    display: none;
+    width: 34vw;
+    position: relative;
+    top: -12vh;
+}
+
+#goblin-image{
+    display: none;
+
+}
+
+#wyvern-image{
+    display: none;
+}
+
+#go {
+    display: none;
+    position: relative;
+    cursor: pointer;
+    top: 30vh;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    background-color: seashell;
+    font-size: 2rem;
+    border: 3px rgb(140, 140, 247) solid;
+    border-radius: 11%;
+}
