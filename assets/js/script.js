@@ -92,6 +92,7 @@ var player = {
     weapon: {
         weapName: ["Sword", "Wood Stick", "Axe", "Fist"],
         weapDmg: [45, 12, 30, 5],
+        numUpgrades: 0,
         weapAcquired: ["You obtained a Sword!! A weapon for a man", "You obtained a Wood Stick... you can be creative i guess..", 
         "You obtained an Axe! Watch out for its sharp side!", "You obtained a Fist! Did you just learn how to make fist?"],
         attackMsg: ["You swing your sword with your full strength!", "You swing your... wood stick... better than nothing", "You smash your enemy with your axe!", "You hit your opponent with your fist!"]
@@ -429,10 +430,31 @@ function levelUp(){
 }
 
 function upgradeWeapon(){
-    var extraDmg = Math.floor(Math.random() * 10) + 10
-    player.attackDmg += extraDmg;
-    eventStatus.text(player.weapon.weapName[playerCurrentWeapon] + " has been upgraded!");
-    attackStatus.text(extraDmg + " damage increase!");
+    var upgradesNum = player.weapon.numUpgrades;
+    var extraDmg;
+    if(player.attackDmg >= 22){
+        extraDmg = Math.floor(Math.random() * ((player.attackDmg/2) - 10 + 1)) + 10  
+    } else {
+        extraDmg = Math.floor(Math.random() * (20 - 10 + 1)) + 10
+    }
+    var chanceUpg = Math.floor(Math.random() * 100);
+
+    if(upgradesNum < 2 || chanceUpg > (20 + upgradesNum)){
+        player.attackDmg += extraDmg;
+        eventStatus.text(player.weapon.weapName[playerCurrentWeapon] + " has been upgraded!");
+        attackStatus.text(extraDmg + " damage increase!");
+        player.weapon.numUpgrades++;
+    }
+    else if(chanceUpg <= (10 + upgradesNum)){
+        player.attackDmg -= Math.floor(player.attackDmg/2);
+        eventStatus.text("You burned your weapon!!");
+        attackStatus.text("You lost half of your damage!")
+    } else if (chanceUpg <= (20 + upgradesNum)){
+        player.attackDmg -= 10;
+        eventStatus.text("Upgrade failed...");
+        attackStatus.text("You lost 10 damage!");
+    }
+
     moveBtn.css("display", "inline")
     
 }
