@@ -42,8 +42,8 @@ var monsters = [
     {
         monName: "Mutant Spider",
         attackDmg: 45,
-        hp: 20,
-        maxHp: 20,
+        hp: 40,
+        maxHp: 40,
         def: 1,
         img: $("#spider-image"),
         attackMsg: "Spider jumped onto you!",
@@ -221,7 +221,7 @@ function encounter(){
     if(player.lv.current > 5){
         currentMon = Math.floor(Math.random() * monsters.length);
     } else if(player.lv.current >= 3){
-        currentMon = Math.floor(Math.random() * (monsters.length - 1)) + 1;
+        currentMon = Math.floor(Math.random() * (monsters.length - 2)) + 1;
     } else {
         currentMon = Math.floor(Math.random() * (monsters.length - 2));
 
@@ -436,7 +436,10 @@ function levelUp(){
     if(player.lv.current < 3){
         player.lv.expNeeded += 10;
     } else {
-        player.lv.expNeeded += player.lv.expNeeded * 1.5;
+        player.lv.expNeeded += Math.floor(player.lv.expNeeded * 1.5);
+        for(var i = 0; i < monsters.length; i++){
+            monsters[i].maxHp += player.lv.current * 8;
+        }
 
     }
 
@@ -459,23 +462,29 @@ function upgradeWeapon(){
     var upgradesNum = player.weapon.numUpgrades;
     var extraDmg;
     if(player.attackDmg >= 60){
-        extraDmg = Math.floor(Math.random() * ((player.attackDmg/3) - 10 + 1)) + 10  
+        extraDmg = Math.floor(Math.random() * ((player.attackDmg/4) - 10 + 1)) + 10  
     } else {
         extraDmg = Math.floor(Math.random() * 20) + 1;
     }
-    var chanceUpg = Math.floor(Math.random() * 100);
 
-    if(upgradesNum < 2 || chanceUpg > (30 + (upgradesNum * 2))){
+    var chanceUpg = Math.floor(Math.random() * 100);
+    var failureMult = (upgradesNum * 3) + (player.lv.current * 2);
+    if(failureMult >= 70){
+        failureMult = 69;
+    }
+
+    if(upgradesNum < 2 || chanceUpg > (30 + failureMult)){
         player.attackDmg += extraDmg;
         eventStatus.text(player.weapon.weapName[playerCurrentWeapon] + " has been upgraded!");
         attackStatus.text(extraDmg + " damage increase!");
         player.weapon.numUpgrades++;
     }
-    else if(chanceUpg <= (8 + (upgradesNum * 2))){
+    else if(chanceUpg <= (8 + failureMult)){
         player.attackDmg -= Math.floor(player.attackDmg/2);
+        upgradesNum--;
         eventStatus.text("You burned your weapon!!");
         attackStatus.text("You lost half of your damage!")
-    } else if (chanceUpg <= (30 + (upgradesNum * 2))){
+    } else if (chanceUpg <= (30 + failureMult)){
         player.attackDmg -= 10;
         eventStatus.text("Upgrade failed...");
         attackStatus.text("You lost 10 damage!");
