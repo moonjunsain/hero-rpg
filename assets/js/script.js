@@ -15,7 +15,7 @@ var monsters = [
             return dmg;
         },
         calDropExp: function(){
-            var exp = Math.floor(Math.random() * (this.dropExpMax - this.dropExpMin + 1) + this.dropExpMin);
+            var exp = Math.floor(Math.random() * (this.dropExpMax - this.dropExpMin + 1)) + this.dropExpMin;
             return exp;
         },
     },
@@ -35,9 +35,30 @@ var monsters = [
             return dmg;
         },
         calDropExp: function(){
-            var exp = Math.floor(Math.random() * (this.dropExpMax - this.dropExpMin + 1) + this.dropExpMin)
+            var exp = Math.floor(Math.random() * (this.dropExpMax - this.dropExpMin + 1)) + this.dropExpMin
             return exp;
         },
+    },
+    {
+        monName: "Mutant Spider",
+        attackDmg: 45,
+        hp: 20,
+        maxHp: 20,
+        def: 1,
+        img: $("#spider-image"),
+        attackMsg: "Spider jumped onto you!",
+        dropExpMax: 30,
+        dropExpMin: 15,
+        calDmg: function(){
+            var dmg = this.attackDmg + Math.floor(Math.random() * 10) + calCrit(this.attackDmg);
+            console.log("damage from mon: " + dmg);
+            return dmg;
+        },
+        calDropExp: function(){
+            var exp = Math.floor(Math.random() * (this.dropExpMax - this.dropExpMin + 1)) + this.dropExpMin
+            return exp;
+        },
+
     },
     {
         monName: "Wyvern",
@@ -55,7 +76,7 @@ var monsters = [
             return dmg;
         },
         calDropExp: function(){
-            var exp = Math.floor(Math.random() * (this.dropExpMax - this.dropExpMin + 1) + this.dropExpMin);
+            var exp = Math.floor(Math.random() * (this.dropExpMax - this.dropExpMin + 1)) + this.dropExpMin;
             return exp;
         },
     },
@@ -75,7 +96,7 @@ var monsters = [
             return dmg;
         },
         calDropExp: function(){
-            var exp = Math.floor(Math.random() * (this.dropExpMax - this.dropExpMin + 1) + this.dropExpMin);
+            var exp = Math.floor(Math.random() * (this.dropExpMax - this.dropExpMin + 1)) + this.dropExpMin;
             return exp;
         },
     }, 
@@ -200,7 +221,7 @@ function encounter(){
     if(player.lv.current > 5){
         currentMon = Math.floor(Math.random() * monsters.length);
     } else if(player.lv.current >= 3){
-        currentMon = Math.floor(Math.random() * (monsters.length - 1));
+        currentMon = Math.floor(Math.random() * (monsters.length - 1)) + 1;
     } else {
         currentMon = Math.floor(Math.random() * (monsters.length - 2));
 
@@ -438,7 +459,7 @@ function upgradeWeapon(){
     var upgradesNum = player.weapon.numUpgrades;
     var extraDmg;
     if(player.attackDmg >= 60){
-        extraDmg = Math.floor(Math.random() * ((player.attackDmg/2) - 10 + 1)) + 10  
+        extraDmg = Math.floor(Math.random() * ((player.attackDmg/3) - 10 + 1)) + 10  
     } else {
         extraDmg = Math.floor(Math.random() * 20) + 1;
     }
@@ -450,7 +471,7 @@ function upgradeWeapon(){
         attackStatus.text(extraDmg + " damage increase!");
         player.weapon.numUpgrades++;
     }
-    else if(chanceUpg <= (15 + (upgradesNum * 2))){
+    else if(chanceUpg <= (8 + (upgradesNum * 2))){
         player.attackDmg -= Math.floor(player.attackDmg/2);
         eventStatus.text("You burned your weapon!!");
         attackStatus.text("You lost half of your damage!")

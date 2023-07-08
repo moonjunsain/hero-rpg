@@ -193,6 +193,13 @@ body {
     display: none;
 }
 
+#spider-image {
+    display: none;
+    position: relative;
+    top: 5vh;
+    width: 38vw;
+}
+
 #go {
     display: none;
     position: relative;
