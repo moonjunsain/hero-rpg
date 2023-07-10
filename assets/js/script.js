@@ -158,6 +158,7 @@ textBox.append(healNext);
 var currentMon = 0;
 var playerAttackEffect = $('#attack-effect');
 var hpBar = $('#health-bar');
+var healEffect = $('#healing');
 
 var moveNextBtn = $("<button>")
 moveNextBtn.text("Move");
@@ -420,12 +421,14 @@ function playerHeal(whichMon){
     }
     
     // displays heal message
+    eventStatus.text("Goddess grants you healing...")
     attackStatus.text(healAmnt + " was healed! (does not heal over your max hp)");
     // if the healed hp exceeds player's max hp, drop the left over hp
         // changes player's status text hp
     plStatus.html("HP: " + player.hp + "<br>Lv: " + player.lv.current);
     hpBar.attr("value", player.hp);
-
+    showHeal(1300)
+    
     setTimeout(function(){
         monTurn(whichMon);
     }, 1300)
@@ -521,8 +524,11 @@ function nextStageHeal(){
 
 }
 
-function hideButton(){
-
+function showHeal(time){
+    healEffect.css("display", "block")
+    setTimeout(function(){
+        healEffect.css("display", "none");
+    }, time)
 }
 chestCl.on("click", startGame);
 attackBtn.on("click", function(){
