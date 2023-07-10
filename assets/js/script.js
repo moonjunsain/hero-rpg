@@ -83,8 +83,8 @@ var monsters = [
     {
         monName: "Dragon",
         attackDmg: 65,
-        hp: 500,
-        maxHp: 500,
+        hp: 350,
+        maxHp: 350,
         def: 40,
         img: $("#dragon-image"),
         attackMsg: "Dragon attacks with its claw",
@@ -411,7 +411,7 @@ function playerHeal(whichMon){
     attackBtn.css("display", "none");
     // calculates random value between 0 and player's max hp / 2
     var maxHeal = Math.floor(player.maxHp / 2)
-    var healAmnt = Math.floor(Math.random() * (maxHeal + 1));
+    var healAmnt = Math.floor(Math.random() * (maxHeal - 20 + 1)) + 20;
     player.hp += healAmnt;
     if(player.hp >= player.maxHp){
         player.hp = player.maxHp;
@@ -496,7 +496,7 @@ function upgradeWeapon(){
     }
     else if(chanceUpg <= (8 + failureMult)){
         player.attackDmg -= Math.floor(player.attackDmg/2);
-        upgradesNum--;
+        upgradesNum -= 3;
         eventStatus.text("You burned your weapon!!");
         attackStatus.text("You lost half of your damage!")
     } else if (chanceUpg <= (30 + failureMult)){
@@ -512,7 +512,7 @@ function upgradeWeapon(){
 function nextStageHeal(){
     healNext.css("display", "none");
     var maxHeal = Math.floor(player.maxHp / 2)
-    var healAmnt = Math.floor(Math.random() * (maxHeal - 20 + 1)) + 20;
+    var healAmnt = Math.floor(Math.random() * (maxHeal - 30 + 1)) + 30;
     player.hp += healAmnt;
     if(player.hp >= player.maxHp){
         player.hp = player.maxHp;
