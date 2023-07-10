@@ -517,7 +517,9 @@ function nextStageHeal(){
     if(player.hp >= player.maxHp){
         player.hp = player.maxHp;
     }
+    eventStatus.text("Goddess mourns for your wound...")
     attackStatus.text(healAmnt + " was healed! (does not heal over your max hp)")
+    showHeal(1500)
     hpBar.attr("value", player.hp);
     plStatus.html("HP: " + player.hp + "<br>Lv: " + player.lv.current);
     moveBtn.css("display", "inline")
