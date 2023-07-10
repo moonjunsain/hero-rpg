@@ -215,3 +215,19 @@ body {
     border: 3px rgb(140, 140, 247) solid;
     border-radius: 11%;
 }
+
+#attack-effect{
+    display: none;
+    position: absolute;
+    width: 27vw;
+    top: 1vh;
+}
+
+#health-bar{
+    position: relative;
+    top: 1vh;
+    left: 25vw;
+    background-color: green;
+    border: 2px black solid;
+    border-radius: 10%;
+}

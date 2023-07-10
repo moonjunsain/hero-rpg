@@ -156,6 +156,8 @@ var healNext = $("<button>");
 healNext.text("Heal");
 textBox.append(healNext);
 var currentMon = 0;
+var playerAttackEffect = $('#attack-effect');
+var hpBar = $('#health-bar');
 
 var moveNextBtn = $("<button>")
 moveNextBtn.text("Move");
@@ -171,6 +173,8 @@ function startGame(){
     textBox.css("display", "block")
     chestCl.css("display", "none")
     chestOp.css("display", "block")
+    hpBar.attr("value", player.hp);
+    hpBar.attr("max", player.maxHp);
     // lets the player know which weapon they optained from the chest
     alert(player.weapon.weapAcquired[playerCurrentWeapon]);
     player.attackDmg = player.weapon.weapDmg[playerCurrentWeapon];
@@ -342,6 +346,7 @@ function monTurn(whichMon){
         // changes player's status text hp
         eventStatus.text(monsters[whichMon].attackMsg)
         attackStatus.text(dmg + " damage dealt to " + player.plName);
+        hpBar.attr("value", player.hp);
         if(player.hp <= 0){
             console.log("player 0")
             player.hp = 0;
@@ -364,6 +369,11 @@ function playerAttack(whichMon){
     }, 1000)
     healBtn.css("display", "none")
     attackBtn.css("display", "none");
+    playerAttackEffect.css("display", "block");
+    setTimeout(function(){
+        playerAttackEffect.css("display", "none")
+
+    }, 490)
     
 
     // calculate damage from player and subtract it from the monster's hp
@@ -414,6 +424,7 @@ function playerHeal(whichMon){
     // if the healed hp exceeds player's max hp, drop the left over hp
         // changes player's status text hp
     plStatus.html("HP: " + player.hp + "<br>Lv: " + player.lv.current);
+    hpBar.attr("value", player.hp);
 
     setTimeout(function(){
         monTurn(whichMon);
@@ -432,6 +443,7 @@ function levelUp(){
     player.def += player.lv.current * 2;
 
     player.maxHp += player.lv.current * 10;
+    
     // increases exp needed by *= 1.5
     if(player.lv.current < 3){
         player.lv.expNeeded += 10;
@@ -454,7 +466,7 @@ function levelUp(){
     setTimeout(function(){
         textBox.children("#temp").remove();
     }, 2000);
-
+    hpBar.attr("max", player.maxHp);
     plStatus.html("HP: " + player.hp + "<br>Lv: " + player.lv.current);
 }
 
@@ -503,6 +515,7 @@ function nextStageHeal(){
         player.hp = player.maxHp;
     }
     attackStatus.text(healAmnt + " was healed! (does not heal over your max hp)")
+    hpBar.attr("value", player.hp);
     plStatus.html("HP: " + player.hp + "<br>Lv: " + player.lv.current);
     moveBtn.css("display", "inline")
 
