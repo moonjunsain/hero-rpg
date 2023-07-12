@@ -556,6 +556,7 @@ function updateStats(){
     player.maxHp = maxHPStats;
     player.def = defStats;
     player.critChance = critChanceStats;
+    hpBar.attr("max", player.maxHp)
 }
 
 chestCl.on("click", startGame);
