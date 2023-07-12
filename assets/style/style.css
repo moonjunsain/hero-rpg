@@ -77,14 +77,14 @@ body {
     text-align: center;
     color: white;
     width: 60vw;
-    height: 27vh;
+    height: 38vh;
 }
 
 #textBox-container {
     display: flex;
     justify-content: center;
     position: relative;
-    top: 70vh;
+    top: 61vh;
 }
 
 #player-status{
@@ -238,4 +238,15 @@ body {
     position: absolute;
     top: -13vh;
     left: 11vw;
+}
+
+#statButton{
+    color: black;
+    position: absolute;
+    left: 20vw;
+}
+
+.textContainer{
+    position: relative;
+    top: -5vh;
 }

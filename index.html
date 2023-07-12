@@ -41,19 +41,22 @@
 
     <section id="textBox-container">
         <article id="textBox">
+            <button id="statButton" type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#statsModal">
+                Open Stats
+            </button>
             <progress id="health-bar" max="100" value="100"></progress>
             <P id="player-status">HP: 100 <br>Lv: 1</P>
-            <p id="event-status"></p>
-            <p id="critical" style="color: red; display: none;">CRITICAL HIT</p>
-            <p id="attack-status"></p>
+            <div class="textContainer">
+                <p id="event-status"></p>
+                <p id="critical" style="color: red; display: none;">CRITICAL HIT</p>
+                <p id="attack-status"></p>
+            </div>
             
         </article>
     </section>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#statsModal">
-        Launch demo modal
-    </button>
+    
     
     <!-- Modal -->
     <div class="modal fade" id="statsModal" tabindex="-1" aria-labelledby="stats-modal" aria-hidden="true">
@@ -64,7 +67,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <h4>Spendable Stats: <span id="spendable-stats">10</span></h4>
+            <h4>Spendable Stats: <span id="spendable-stats">0</span></h4>
             <h6>Max HP: <span id="hp-stats">100</span> <button class="stats-increase mx-2 btn-secondary" style="--bs-btn-padding-y: .05rem; --bs-btn-padding-x: .25rem; --bs-btn-font-size: .70rem;">+</button></h6>
             <h6>Strength: <span id="stength-stats">1</span> <button class="stats-increase mx-2 btn-secondary" style="--bs-btn-padding-y: .05rem; --bs-btn-padding-x: .25rem; --bs-btn-font-size: .70rem;">+</button></h6>
             <h6>Defense: <span id="defense-stats">10</span> <button class="stats-increase mx-2 btn-secondary" style="--bs-btn-padding-y: .05rem; --bs-btn-padding-x: .25rem; --bs-btn-font-size: .70rem;">+</button></h6>

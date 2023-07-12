@@ -443,11 +443,23 @@ function levelUp(){
     // increment lv by 1
     player.lv.current++;
     // increases player's attack dmg scaling wiht lv * 3
-    player.attackDmg += player.lv.current * 3;
-    // increases player's defence with lv * 2
-    player.def += player.lv.current * 2;
+    player.attackDmg += player.lv.current * 2;
 
-    player.maxHp += player.lv.current * 10;
+    player.def += 2;
+
+    player.maxHp += player.lv.current * 7;
+
+    // increases spendable stats by 5
+    var spendableStats = parseInt($("#spendable-stats").text());
+    spendableStats += 5;
+    $("#spendable-stats").text(spendableStats);
+
+
+    $("#hp-stats").text(player.maxHp);
+    $("#defense-stats").text(player.def);
+    
+
+    
     
     // increases exp needed by *= 1.5
     if(player.lv.current < 3){
@@ -534,6 +546,18 @@ function showHeal(time){
         healEffect.css("display", "none");
     }, time)
 }
+
+function updateStats(){
+    var strengthStats = parseInt($("#stength-stats").text());
+    var maxHPStats = parseInt($("#hp-stats").text());
+    var defStats = parseInt($("#defense-stats").text());
+    var critChanceStats = parseInt($("#crit-chance-stat").text());
+    player.strength = strengthStats;
+    player.maxHp = maxHPStats;
+    player.def = defStats;
+    player.critChance = critChanceStats;
+}
+
 chestCl.on("click", startGame);
 attackBtn.on("click", function(){
     attackBtn.css("display", "none");
