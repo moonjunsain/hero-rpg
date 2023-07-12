@@ -303,7 +303,7 @@ function calCrit(baseDmg, critChance = 10){
     var chances = Math.floor(Math.random() * 100);
     
     var returnDmg = 0;
-    if(critChance <= 10){
+    if(chances <= critChance){
         console.log("crit")
         critMsg.css("display", "block");
         returnDmg = Math.floor(baseDmg/2);
