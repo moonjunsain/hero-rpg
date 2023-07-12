@@ -121,9 +121,11 @@ var player = {
     maxHp: 100,
     hp: 100,
     def: 10,
+    strength: 1,
+    critChance: 10,
     img: $("#player-image"),
     calDmg: function(){
-        var dmg = this.attackDmg + Math.floor(Math.random() * 10) + calCrit(this.attackDmg);
+        var dmg = this.attackDmg + this.strength + Math.floor(Math.random() * 10) + calCrit(this.attackDmg + this.strength, this.critChance);
         console.log("damage from player: " + dmg);
         return dmg;
     },
@@ -294,14 +296,14 @@ function afterBattle(whichMon){
     }
 }
 
-function calCrit(baseDmg){
+function calCrit(baseDmg, critChance = 10){
     critMsg.css("display", "none");
     // triggered every time when monster or player needs to calculate damage
     // chances of critical is less than 10%
     var chances = Math.floor(Math.random() * 100);
     
     var returnDmg = 0;
-    if(chances <= 10){
+    if(critChance <= 10){
         console.log("crit")
         critMsg.css("display", "block");
         returnDmg = Math.floor(baseDmg/2);
@@ -568,4 +570,20 @@ moveNextBtn.on("click", function(){
     attackStatus.text("");
     moveNextBtn.css("display", "none");
     nextStage(currentMon);
+})
+
+$(".stats-increase").on("click", function(){
+    var spendableStats = parseInt($("#spendable-stats").text());
+    if(spendableStats > 0){
+        spendableStats--;
+        var increaseStats = parseInt($(this).siblings("span").text());
+        if($(this).parent().text().includes("Critical")){
+            increaseStats += 2;
+        }else {
+            increaseStats += 5;
+        }
+        $(this).siblings("span").text(increaseStats);
+        $("#spendable-stats").text(spendableStats);
+        updateStats();
+    }
 })
